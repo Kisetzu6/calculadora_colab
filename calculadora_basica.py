@@ -1,24 +1,62 @@
-def suma(a,b):
-    return a + b
+import pandas as pd
+import matplotlib.pyplot as plt
 
-def resta(a,b):
-    return a - b
+def calculadora():
+    while True:
+        print("\nCalculadora")
+        print("1. Suma")
+        print("2. Resta")
+        print("3. Multiplicación")
+        print("4. División")
+        print("5. Gráfica de función lineal")
+        print("Escribe 'salir' para terminar")
+        
+        opcion = input("Ingrese la opción deseada: ")
+        
+        if opcion.lower() == "salir":
+            print("Hasta luego")
+            break
+        
+        if opcion == "1":
+            num1 = float(input("Ingrese el primer número: "))
+            num2 = float(input("Ingrese el segundo número: "))
+            resultado = num1 + num2
+            print(f"La suma es: {resultado}")
+            
+        elif opcion == "2":
+            num1 = float(input("Ingrese el primer número: "))
+            num2 = float(input("Ingrese el segundo número: "))
+            resultado = num1 - num2
+            print(f"La resta es: {resultado}")
+            
+        elif opcion == "3":
+            num1 = float(input("Ingrese el primer número: "))
+            num2 = float(input("Ingrese el segundo número: "))
+            resultado = num1 * num2
+            print(f"La multiplicación es: {resultado}")
+            
+        elif opcion == "4":
+            num1 = float(input("Ingrese el primer número: "))
+            num2 = float(input("Ingrese el segundo número: "))
+            if num2 != 0:
+                resultado = num1 / num2
+                print(f"La división es: {resultado}")
+            else:
+                print("No se puede dividir por cero.")
+                
+        elif opcion == "5":
+            x = pd.Series(range(-10, 11))
+            m = float(input("Ingrese la pendiente (m): "))
+            b = float(input("Ingrese el intercepto (b): "))
+            y = m * x + b
+            
+            plt.plot(x, y)
+            plt.title(f"Gráfica de y = {m}x + {b}")
+            plt.xlabel("x")
+            plt.ylabel("y")
+            plt.show()
+            
+        else:
+            print("Opción inválida. Por favor, ingrese un número entre 1 y 5.")
 
-def main():
-    print("Calculadora Básica")
-    print("1. Sumar")
-    print("2. Restar")
-    print("3. Salir")
-    opcion = input("Selecciona una opción: ")	
-    a = int(input("Ingresa el primer número: "))
-    b = int(input("Ingresa el segundo número: ")) 
-    if opcion == "1":
-        print("Resultado de la suma: ", suma(a,b))
-    elif opcion == "2":
-        print("Resultado de la resta: ", resta(a,b))
-    elif opcion == "3":
-        print("Saliendo de la calculadora...")
-    else:
-        print("Opción no válida. Por favor, selecciona una opción válida.")
-
-main()
+calculadora()
