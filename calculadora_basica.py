@@ -1,9 +1,30 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
+def suma(num1, num2):
+    return num1 + num2
+
+def resta(num1, num2):
+    return num1 - num2
+
+def multiplicacion(num1, num2):
+    return num1 * num2
+
+def division(num1, num2):
+    if num2 == 0:
+        return "Error: No se puede dividir por cero."
+    return num1 / num2
+
+def numerob(mensaje):
+    while True:
+        try:
+            return float(input(mensaje))
+        except ValueError:
+            print("Error: Por favor, ingrese un número válido.")
+
 def calculadora():
     while True:
-        print("\nCalculadora")
+        print("Calculadora")
         print("1. Suma")
         print("2. Resta")
         print("3. Multiplicación")
@@ -17,45 +38,38 @@ def calculadora():
             print("Hasta luego")
             break
         
-        if opcion == "1":
-            num1 = float(input("Ingrese el primer número: "))
-            num2 = float(input("Ingrese el segundo número: "))
-            resultado = num1 + num2
-            print(f"La suma es: {resultado}")
+        elif opcion in ["1", "2", "3", "4"]:
+            num1 = numerob("Ingrese el primer número: ")
+            num2 = numerob("Ingrese el segundo número: ")
             
-        elif opcion == "2":
-            num1 = float(input("Ingrese el primer número: "))
-            num2 = float(input("Ingrese el segundo número: "))
-            resultado = num1 - num2
-            print(f"La resta es: {resultado}")
-            
-        elif opcion == "3":
-            num1 = float(input("Ingrese el primer número: "))
-            num2 = float(input("Ingrese el segundo número: "))
-            resultado = num1 * num2
-            print(f"La multiplicación es: {resultado}")
-            
-        elif opcion == "4":
-            num1 = float(input("Ingrese el primer número: "))
-            num2 = float(input("Ingrese el segundo número: "))
-            if num2 != 0:
-                resultado = num1 / num2
+            if opcion == "1":
+                resultado = suma(num1, num2)
+                print(f"La suma es: {resultado}")
+            elif opcion == "2":
+                resultado = resta(num1, num2)
+                print(f"La resta es: {resultado}")
+            elif opcion == "3":
+                resultado = multiplicacion(num1, num2)
+                print(f"La multiplicación es: {resultado}")
+            elif opcion == "4":
+                resultado = division(num1, num2)
                 print(f"La división es: {resultado}")
-            else:
-                print("No se puede dividir por cero.")
-                
+        
         elif opcion == "5":
-            x = pd.Series(range(-10, 11))
-            m = float(input("Ingrese la pendiente (m): "))
-            b = float(input("Ingrese el intercepto (b): "))
-            y = m * x + b
-            
-            plt.plot(x, y)
-            plt.title(f"Gráfica de y = {m}x + {b}")
-            plt.xlabel("x")
-            plt.ylabel("y")
-            plt.show()
-            
+            try:
+                m = numerob("Ingrese la pendiente (m): ")
+                b = numerob("Ingrese el intercepto (b): ")
+                x = pd.Series(range(-10, 11))
+                y = m * x + b
+                
+                plt.plot(x, y)
+                plt.title(f"Gráfica de y = {m}x + {b}")
+                plt.xlabel("x")
+                plt.ylabel("y")
+                plt.show()
+            except Exception as e:
+                print(f"Error al generar la gráfica: {e}")
+                
         else:
             print("Opción inválida. Por favor, ingrese un número entre 1 y 5.")
 
